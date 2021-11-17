@@ -468,8 +468,8 @@
 
     <!-- Button trigger modal -->
     <section class="skrol">
-      <button type="button" style="position: fixed; right: 0; margin-right: 20px;" id="formubah"
-        class="btn btn-secondary">Ubah Akun</button>
+      <!-- <button type="button" style="position: fixed; right: 0; margin-right: 20px;" id="formubah"
+        class="btn btn-secondary">Ubah Akun</button> -->
       <table id="tabelhasil" class="table">
         <thead class="text-white">
           <tr>
@@ -520,7 +520,7 @@
   </footer>
 
   <!-- Modal Pengaturan -->
-  <div class="modal fade" id="modalpengaturan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="modalpengaturan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -552,10 +552,10 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- modal tambah orang -->
-  <div class="modal fade" id="modaltambahorang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="modaltambahorang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -591,7 +591,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- <script src="tes2.js"></script> -->
   <script src="tes.js"></script>
@@ -617,18 +617,18 @@
       localStorage.setItem('noTersedia', JSON.stringify(mentah2));
     }
 
-    let ubah = document.getElementById('formubah')
-    let modalpengaturan = new bootstrap.Modal(document.getElementById('modalpengaturan'))
+    // let ubah = document.getElementById('formubah')
+    // let modalpengaturan = new bootstrap.Modal(document.getElementById('modalpengaturan'))
 
-    ubah.addEventListener('click', () => {
-      hasilorang();
-      modalpengaturan.show();
-    })
+    // ubah.addEventListener('click', () => {
+    //   hasilorang();
+    //   modalpengaturan.show();
+    // })
 
-    $('#modalpengaturan')[0].addEventListener('show.bs.modal', (e) => {
-      hasilorang()
+    // $('#modalpengaturan')[0].addEventListener('show.bs.modal', (e) => {
+    //   hasilorang()
 
-    })
+    // })
 
 
 
@@ -667,7 +667,7 @@
                 <td><img class="hapusbaris" src="/Arsipnomor/hapus.png" style="width:30px;margin:auto"/></td>`
     }
 
-    let tabelhasil = document.querySelector('#tabelhasil')
+    // let tabelhasil = document.querySelector('#tabelhasil')
     let dbNoTersedia = JSON.parse(localStorage.getItem('noTersedia'))
 
     // tabel hasil input
@@ -692,125 +692,125 @@
     let tabelorang = document.querySelector('#tabelorang')
 
     //SIMPAN PENGATURAN
-    $('#simpanpengaturan').click(function (e) {
-      $('#tabelorang .bisaubah').filter(e => {
-        if ($('#tabelorang .bisaubah').eq(e).text() != "") {
-          console.log($('#tabelorang .bisaubah').eq(e).text())
-        }
-      })
-    })
+    // $('#simpanpengaturan').click(function (e) {
+    //   $('#tabelorang .bisaubah').filter(e => {
+    //     if ($('#tabelorang .bisaubah').eq(e).text() != "") {
+    //       console.log($('#tabelorang .bisaubah').eq(e).text())
+    //     }
+    //   })
+    // })
 
     ////////////////////////////////////////////
     // tabel hasil orang
-    function hapusTrOrang() {
-      //// HAPUS TR DARI AKHIR SAMPAI SEBELUM TR JUDUL DI TABEL PENGATURAN SEBELUM MENGISI TR DARI LOCALSTORAGE
-      for (let i = $('#tabelorang tr').length; i > 0; i--) {
-        $('#tabelorang tr').eq(i).remove();
-      }
-    }
+    // function hapusTrOrang() {
+    //   //// HAPUS TR DARI AKHIR SAMPAI SEBELUM TR JUDUL DI TABEL PENGATURAN SEBELUM MENGISI TR DARI LOCALSTORAGE
+    //   for (let i = $('#tabelorang tr').length; i > 0; i--) {
+    //     $('#tabelorang tr').eq(i).remove();
+    //   }
+    // }
 
-    async function hasilorang() {
-      hapusTrOrang()
+    // async function hasilorang() {
+    //   hapusTrOrang()
 
-      let arrTbl = [];
-      for (x in dbAkun) {
-        arrTbl.push(x)
-      }
+    //   let arrTbl = [];
+    //   for (x in dbAkun) {
+    //     arrTbl.push(x)
+    //   }
 
-      for (let i = 0; i < arrTbl.length; i++) {
-        let trbaru = document.createElement('tr');
-        trbaru.innerHTML = templateRowHasilorang(i + 1, arrTbl[i], dbAkun[arrTbl[i]])
-        $('#tabelorang tbody')[0].appendChild(trbaru)
-      }
+    //   for (let i = 0; i < arrTbl.length; i++) {
+    //     let trbaru = document.createElement('tr');
+    //     trbaru.innerHTML = templateRowHasilorang(i + 1, arrTbl[i], dbAkun[arrTbl[i]])
+    //     $('#tabelorang tbody')[0].appendChild(trbaru)
+    //   }
 
-      hapusorang(arrTbl)
-      console.log('ok')
-    }
+    //   hapusorang(arrTbl)
+    //   console.log('ok')
+    // }
 
-    hasilorang()
-      .then(function () {
-        let tblorg = $('#tabelorang').DataTable({
-          "paging": true,
-          "ordering": true,
-          "info": false,
-          "lengthChange": false,
-          "searching": false,
-        })
-      })
-      .then(function () {
-        $('#tabelorang').click(function (e) {
-          if ($(e.target).hasClass('bisaubah')) {
-            $(e.target).html(`<input type="text" style="width:100%" value=${$(e.target).text()}>`)
-          }
-        })
-      })
+    // hasilorang()
+    //   .then(function () {
+    //     let tblorg = $('#tabelorang').DataTable({
+    //       "paging": true,
+    //       "ordering": true,
+    //       "info": false,
+    //       "lengthChange": false,
+    //       "searching": false,
+    //     })
+    //   })
+    //   .then(function () {
+    //     $('#tabelorang').click(function (e) {
+    //       if ($(e.target).hasClass('bisaubah')) {
+    //         $(e.target).html(`<input type="text" style="width:100%" value=${$(e.target).text()}>`)
+    //       }
+    //     })
+    //   })
 
 
-    //isi tabel orang setelah klik tombol simpan
-    function templateRowHasilorang(no, user, pass) {
-      return `<td>${no}</td>
-                <td class="bisaubah">${user}</td>
-                <td class="bisaubah">${pass}</td>
-                <td><img class="hapusorang" src="/Arsipnomor/hapus.png" style="width:30px;margin:auto"/></td>             `
-    }
+    // //isi tabel orang setelah klik tombol simpan
+    // function templateRowHasilorang(no, user, pass) {
+    //   return `<td>${no}</td>
+    //             <td class="bisaubah">${user}</td>
+    //             <td class="bisaubah">${pass}</td>
+    //             <td><img class="hapusorang" src="/Arsipnomor/hapus.png" style="width:30px;margin:auto"/></td>             `
+    // }
 
-    //hapus orang 
-    function hapusorang(arrTbl) {
-      $('.hapusorang').click(function (e) {
-        let index = $('.hapusorang').index(this)
-        delete dbAkun[arrTbl[index]]
-        localStorage.removeItem('dbAkun')
-        localStorage.setItem('dbAkun', JSON.stringify(dbAkun))
-        alert('AKUN TERHAPUS')
-        hasilorang()
-      })
-    }
+    // //hapus orang 
+    // function hapusorang(arrTbl) {
+    //   $('.hapusorang').click(function (e) {
+    //     let index = $('.hapusorang').index(this)
+    //     delete dbAkun[arrTbl[index]]
+    //     localStorage.removeItem('dbAkun')
+    //     localStorage.setItem('dbAkun', JSON.stringify(dbAkun))
+    //     alert('AKUN TERHAPUS')
+    //     hasilorang()
+    //   })
+    // }
 
-    //////////////////////////////////
-    //Simpan Orang
-    let tambah = document.getElementById('simpantambahorang')
-    let user = document.getElementById('username')
-    let pass = document.getElementById('password')
+    // //////////////////////////////////
+    // //Simpan Orang
+    // let tambah = document.getElementById('simpantambahorang')
+    // let user = document.getElementById('username')
+    // let pass = document.getElementById('password')
 
-    // fungsi tamabh ke localstorage
-    async function dbAkunbaru(dbuser, dbpass) {
-      let isiDb = {};
+    // // fungsi tamabh ke localstorage
+    // async function dbAkunbaru(dbuser, dbpass) {
+    //   let isiDb = {};
 
-      if (!localStorage.getItem('dbAkun')) {
-        isiDb[dbuser] = dbpass;
-        localStorage.setItem('dbAkun', JSON.stringify(isiDb));
-      }
+    //   if (!localStorage.getItem('dbAkun')) {
+    //     isiDb[dbuser] = dbpass;
+    //     localStorage.setItem('dbAkun', JSON.stringify(isiDb));
+    //   }
 
-      isiDb = JSON.parse(localStorage.getItem('dbAkun'));
-      isiDb[dbuser] = dbpass;
+    //   isiDb = JSON.parse(localStorage.getItem('dbAkun'));
+    //   isiDb[dbuser] = dbpass;
 
-      localStorage.setItem('dbAkun', JSON.stringify(isiDb))
-      return isiDb
-    }
+    //   localStorage.setItem('dbAkun', JSON.stringify(isiDb))
+    //   return isiDb
+    // }
 
-    // tambah
-    tambah.addEventListener('click', function (e) {
-      let dataorang = JSON.parse(localStorage.getItem('dbAkun'))
-      let keysorang = Object.keys(dataorang)
-      let baskomkosong = 'kosong'
+    // // tambah
+    // tambah.addEventListener('click', function (e) {
+    //   let dataorang = JSON.parse(localStorage.getItem('dbAkun'))
+    //   let keysorang = Object.keys(dataorang)
+    //   let baskomkosong = 'kosong'
 
-      for (let i = 0; i < keysorang.length; i++) {
-        if (user.value == keysorang[i]) {
-          baskomkosong = "adami";
-          alert('Akun/Kata Sandi Adami')
-          break;
-        }
-      }
-      if (baskomkosong == "kosong") {
-        //dasar
-        dbAkunbaru(user.value, pass.value)
-          .then(() => {
-            alert("Tersimpan")
-            location.reload()
-          })
-      }
-      e.preventDefault()
-    })
+    //   for (let i = 0; i < keysorang.length; i++) {
+    //     if (user.value == keysorang[i]) {
+    //       baskomkosong = "adami";
+    //       alert('Akun/Kata Sandi Adami')
+    //       break;
+    //     }
+    //   }
+    //   if (baskomkosong == "kosong") {
+    //     //dasar
+    //     dbAkunbaru(user.value, pass.value)
+    //       .then(() => {
+    //         alert("Tersimpan")
+    //         location.reload()
+    //       })
+    //   }
+    //   e.preventDefault()
+    // })
 
     ///////////////////////////////////////////////
 
