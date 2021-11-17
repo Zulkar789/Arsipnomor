@@ -28,6 +28,10 @@
             z-index: -1;
         }
 
+        .bg-secondary {
+            background-color: unset !important;
+        }
+
         #formmasuk {
             margin-top: 15px;
         }
@@ -36,7 +40,7 @@
             margin-top: 15px;
         }
 
-        #formtambah {
+        #tbltambah {
             margin-top: 15px;
         }
 
@@ -56,6 +60,15 @@
 
         #tblSuara:hover {
             background-color: rgb(255, 255, 255) !important;
+        }
+
+        #tbltambah {
+            margin-top: 15px;
+            margin-left: 35px; 
+        }
+
+        .modal-content {
+            background-color: #adb5bd;
         }
     </style>
 </head>
@@ -131,7 +144,7 @@
                                         autocomplete="off">
                                 </div>
                                 <button type="submit" class="btn btn-primary" id="formmasuk">Masukki</button>
-                                <button type="button" style="margin-left: 35px;" id="tbltambah"
+                                <button type="button" id="tbltambah"
                                     class="btn btn-secondary" data-bs-target="#modalSignin"
                                     data-bs-toggle="modal">Daftar</button>
                             </section>
@@ -147,10 +160,10 @@
     <div class="modal fade modal-signin bg-secondary py-5" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true" id="modalSignin">
         <div class="modal-dialog" role="document">
-            <div class="modal-content rounded-5 shadow">
+            <div class="modal-content rounded-5 shadow" style="display: table-caption;">
                 <div class="modal-header p-5 pb-4 border-bottom-0">
                     <!-- <h5 class="modal-title">Modal title</h5> -->
-                    <h2 class="fw-bold mb-0">Daftar Bayar</h2>
+                    <h2 class="fw-bold mb-0">Daftar</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -158,17 +171,17 @@
                 <div class="modal-body p-5 pt-0">
                     <form class="">
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control rounded-4" id="floatingInput"
+                            <input  id="akunbaru" type="text" class="form-control rounded-4" id="floatingInput"
                                 placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
+                            <label for="floatingInput" style="color: black!important;">Akun Baru</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-4" id="floatingPassword"
+                            <input id="passbaru" type="password" class="form-control rounded-4" id="floatingPassword"
                                 placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <label for="floatingPassword" style="color: black!important;">Kata Sandi</label>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
-                        <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                        <button id="tbldaftar" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Daftar</button>
+                        <small class="text-muted" style="color:#000000!important;">By clicking Sign up, you agree to the terms of use.</small>
                         <hr class="my-4">
                         <!-- <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
                         <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">
@@ -201,7 +214,9 @@
         let user = document.getElementById('username')
         let pass = document.getElementById('password')
         let login = document.getElementById('formlogin')
-        let daftar = document.getElementById('formtambah')
+        let daftar = document.getElementById('tbldaftar')
+        let akunbaru = document.getElementById('akunbaru')
+        let passbaru = document.getElementById('passbaru')
 
 
 
@@ -229,29 +244,29 @@
         })
 
         // fungsi tamabh ke localstorage
-        async function dbAkun(dbuser, dbpass) {
+        async function dbAkun(dbakunbaru, dbpassbaru) {
             let isiDb = {};
 
             if (!localStorage.getItem('dbAkun')) {
-                isiDb[dbuser] = dbpass;
+                isiDb[dbakunbaru] = dbpassbaru;
                 localStorage.setItem('dbAkun', JSON.stringify(isiDb));
             }
 
             isiDb = JSON.parse(localStorage.getItem('dbAkun'));
-            isiDb[dbuser] = dbpass;
+            isiDb[dbakunbaru] = dbpassbaru;
 
             localStorage.setItem('dbAkun', JSON.stringify(isiDb))
             return isiDb
         }
 
         // tambah
-        tambah.addEventListener('click', function (e) {
+        daftar.addEventListener('click', function (e) {
             let dataorang = JSON.parse(localStorage.getItem('dbAkun'))
             let keysorang = Object.keys(dataorang)
             let baskomkosong = 'kosong'
 
             for (let i = 0; i < keysorang.length; i++) {
-                if (user.value == keysorang[i]) {
+                if (akunbaru.value == keysorang[i]) {
                     baskomkosong = "adami";
                     alert('Akun/Kata Sandi Adami')
                     break;
@@ -260,10 +275,10 @@
 
             if (baskomkosong == "kosong") {
                 //dasar
-                let hasil = dbAkun(user.value, pass.value)
+                let hasil = dbAkun(akunbaru.value, passbaru.value)
                 alert("Tersimpan")
-                user.value = "";
-                pass.value = "";
+                akunbaru.value = "";
+                passbaru.value = "";
                 //===   
             }
             e.preventDefault()
